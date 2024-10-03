@@ -31,7 +31,7 @@ module "ecs_labels" {
   source   = "cloudposse/label/null"
   version  = "0.25.0" # requires Terraform >= 0.13.0
 
-  enabled    = var.enabled
+  enabled    = true
   attributes = concat(module.this.context.attributes, [each.key])
   tags       = merge(module.this.context.tags, { "AmazonECSManaged" : "true" })
   context    = module.this.context
@@ -44,6 +44,7 @@ module "autoscale_group" {
   version = "0.40.0"
 
   context = module.ecs_labels[each.key].context
+  enabled = true
 
   image_id      = each.value["image_id"] == null ? join("", data.aws_ssm_parameter.ami[*].value) : each.value["image_id"]
   instance_type = each.value["instance_type"]
