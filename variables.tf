@@ -109,7 +109,7 @@ variable "capacity_providers_ec2" {
       override = optional(list(object({
         instance_type = string
         weighted_capacity = number
-      })),[])
+      })),null)
     }))
     placement = optional(object({
       affinity          = string
