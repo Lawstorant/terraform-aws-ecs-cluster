@@ -40,8 +40,7 @@ module "ecs_labels" {
 module "autoscale_group" {
   for_each = local.ec2_capacity_providers
 
-  source  = "cloudposse/ec2-autoscale-group/aws"
-  version = "0.40.0"
+  source = "github.com/Lawstorant/terraform-aws-ec2-autoscale-group"
 
   context = module.ecs_labels[each.key].context
   enabled = true
